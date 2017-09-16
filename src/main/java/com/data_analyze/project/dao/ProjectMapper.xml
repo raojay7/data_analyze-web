@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.project.dao.ProjectMapper">
+    <resultMap id="projectResultMap" type="Project">
+        <id property="_id" column="_id"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="V_or_H"/>
+        <result property="budget_in_acc" column="budget_in_acc"/>
+    </resultMap>
+
+    <!--<select id="selectAccount" parameterType="Integer" resultMap="accountResultMap">-->
+
+
+    <!--</select>-->
+
+    <insert id="insert2015" parameterType="Project">
+        INSERT INTO projects2015(salary_id, name, V_or_H, budget_in_acc)
+        VALUES (#{salary_id}, #{name}, #{type}, #{budget_in_acc});
+    </insert>
+
+    <insert id="insert2016" parameterType="Project">
+        INSERT INTO projects2016(salary_id, name, V_or_H, budget_in_acc)
+        VALUES (#{salary_id}, #{name}, #{type}, #{budget_in_acc});
+    </insert>
+
+    <select id="getAllBudget" parameterType="String" resultType="Float">
+        <bind name="tableName" value="'projects'+year"/>
+        SELECT
+          sum(budget_in_acc)
+        FROM
+          ${tableName}
+    </select>
+
+    <select id="getBudgetInOffice" parameterType="String" resultType="Float">
+        <bind name="tableName" value="'projects'+year"/>
+        SELECT
+          sum(budget_in_acc)
+        FROM
+          ${tableName} as projects
+        INNER JOIN
+          teachers
+        ON
+          projects.salary_id = teachers.salary_id AND
+          teachers.office = #{office}
+    </select>
+
+    <select id="getPeopleAndBudget" parameterType="String" resultType="Project">
+        <bind name="tableName" value="'projects'+year"/>
+        SELECT
+          salary_id,
+          sum(budget_in_acc) as budget_in_acc,
+          name
+        FROM
+          ${tableName} as projects
+        GROUP BY
+          name
+        ORDER BY
+          budget_in_acc DESC
+    </select>
+
+</mapper>

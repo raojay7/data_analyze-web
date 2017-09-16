@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.teachsum.dao.TeachsumSysMapper">
+    <resultMap id="teachsumResultMap" type="Teachsum">
+        <id property="_id" column="_id"/>
+        <result property="department"  column="department"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="name" column="name"/>
+        <result property="year" column="year"/>
+        <result property="teach_workload" column="teach_workload"/>
+        <result property="mentor_load" column="mentor_load"/>
+        <result property="reform_workload" column="reform_workload"/>
+        <result property="sum_workload" column="sum_workload"/>
+    </resultMap>
+
+    <!--动态表名插入 -->
+
+    <insert id="insertDynamic">
+        INSERT INTO ${tableName}(
+        department,salary_id,name,year,teach_workload,mentor_load,reform_workload,sum_workload
+        )VALUES (
+        #{items.department},
+        #{items.salary_id},
+        #{items.name},
+        #{items.year},
+        #{items.teach_workload},
+        #{items.mentor_load},
+        #{items.reform_workload},
+        #{items.sum_workload}
+        )
+    </insert>
+
+    <!--直接的分页查询-->
+    <select id="selectPageListDynamic" resultMap="teachsumResultMap">
+        SELECT * FROM ${tableName} WHERE name LIKE #{pages.keyWord} LIMIT #{pages.start} , #{pages.rows}
+    </select>
+
+    <!--查询总记录数-->
+    <select id="selectPageCountDynamic" resultType="Integer">
+        SELECT COUNT(1) FROM ${tableName}
+    </select>
+
+    <!--传入动态表名更新-->
+    <update id="updateDynamic">
+
+        UPDATE ${tableName} SET
+
+        department = #{items.department},
+        salary_id = #{items.salary_id},
+        name = #{items.name},
+        year = #{items.year},
+        teach_workload = #{items.teach_workload},
+        mentor_load = #{items.mentor_load},
+        reform_workload = #{items.reform_workload},
+        sum_workload =#{items.sum_workload}
+
+        WHERE _id = #{items._id};
+
+    </update>
+
+    <!--传入动态表明删除-->
+    <delete id="deleteDynamic">
+
+        DELETE FROM ${tableName} WHERE _id = #{items._id};
+
+    </delete>
+
+    <!--查询单个实体-->
+    <select id="selectDynamic" resultMap="teachsumResultMap">
+
+        SELECT * FROM ${tableName} WHERE _id = #{items._id};
+
+    </select>
+
+
+</mapper>

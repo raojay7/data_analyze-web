@@ -1,0 +1,317 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.teacher.dao.TeacherMapper">
+
+	<resultMap id="teacherResultMap" type="Teacher">
+
+		<id property="salary_id" column="salary_id"/>
+
+		<result property="name"  column="name"/>
+
+		<result property="gender" column="gender"/>
+
+		<result property="office" column="office"/>
+
+		<result property="birthday" column="birthday"/>
+
+		<result property="race" column="race"/>
+
+		<result property="identity" column="identity"/>
+
+		<result property="hometown" column="hometown"/>
+
+		<result property="politics_status" column="politics_status"/>
+
+		<result property="join_time" column="join_time"/>
+
+		<result property="join_school_time" column="join_school_time"/>
+
+		<result property="join_job_time" column="join_job_time"/>
+
+		<result property="job" column="job"/>
+
+		<result property="job_status" column="job_status"/>
+
+		<result property="authorized" column="authorized"/>
+
+		<result property="on_status" column="on_status"/>
+
+		<result property="department" column="department"/>
+
+		<result property="join_reason" column="join_reason"/>
+
+		<result property="attendance_category" column="attendance_category"/>
+
+		<result property="job_level" column="job_level"/>
+
+		<result property="administrative_post" column="administrative_post"/>
+
+		<result property="prof_and_tech_post" column="prof_and_tech_post"/>
+
+		<result property="special_experience" column="special_experience"/>
+
+		<result property="last_edu_background" column="last_edu_background"/>
+
+		<result property="degree" column="degree"/>
+
+		<result property="degree_time" column="degree_time"/>
+
+		<result property="last_degree" column="last_degree"/>
+
+		<result property="subject" column="subject"/>
+
+		<result property="remark" column="remark"/>
+
+		<result property="mentor_type" column="mentor_type"/>
+
+		<result property="major" column="major"/>
+
+		<result property="post_type" column="post_type"/>
+
+		<result property="graduate_province" column="graduate_province"/>
+
+	</resultMap>
+
+	<insert id="insert" parameterType="Teacher">
+
+		insert into
+		teachers(salary_id,name,gender,office,birthday,race,identity,hometown,politics_status,join_time,join_school_time,join_job_time,
+		job,job_status,authorized,on_status,department,join_reason,attendance_category,job_level,administrative_post,prof_and_tech_post,special_experience,
+		last_edu_background,degree,degree_time,last_degree,subject,remark,mentor_type,major,post_type,graduate_province)
+	    values(
+		#{salary_id},#{name},#{gender},#{office},#{birthday},#{race},#{identity},#{hometown},#{politics_status},#{join_time},#{join_school_time},#{join_job_time},
+		#{job},#{job_status},#{authorized},#{on_status},#{department},#{join_reason},#{attendance_category},#{job_level},#{administrative_post},#{prof_and_tech_post},
+		#{special_experience},#{last_edu_background},#{degree},#{degree_time},#{last_degree},#{subject},#{remark},#{mentor_type},#{major},#{post_type},#{graduate_province}
+		);
+
+    </insert>
+
+	<select id="getSalaryIdFromName" parameterType="String" resultType="String">
+		SELECT salary_id
+		FROM  teachers
+		WHERE name = #{name};
+	</select>
+
+	<select id="execute" parameterType="String" resultType="Integer">
+		${sql}
+	</select>
+
+	<select id="queryByOneColumn" parameterType="String" resultType="Teacher">
+		SELECT
+			salary_id,
+			name,
+    		gender,
+     		office,
+     		birthday,
+     		race,
+    		identity,
+		 	hometown,
+     		politics_status,
+     		join_time,
+     		join_school_time,
+     		join_job_time,
+     		job,
+     		job_status,
+     		authorized,
+		  	on_status,
+    		department,
+     		join_reason,
+     		attendance_category,
+     		job_level,
+     		administrative_post,
+     		prof_and_tech_post,
+     		special_experience,
+     		last_edu_background,
+     		degree,
+    		degree_time,
+     		last_degree,
+     		subject,
+     		remark,
+     		mentor_type,
+     		major,
+     		post_type,
+     		graduate_province
+     	FROM
+     		teachers
+     	WHERE
+     		${columnName} = #{val}
+     	ORDER BY
+     		${columnName};
+	</select>
+
+	<select id="likeQueryByOneColumn" parameterType="String" resultType="Teacher">
+		<bind name="likeVal" value="'%'+val+'%'"/>
+		SELECT
+			salary_id,
+			name,
+    		gender,
+     		office,
+     		birthday,
+     		race,
+    		identity,
+		 	hometown,
+     		politics_status,
+     		join_time,
+     		join_school_time,
+     		join_job_time,
+     		job,
+     		job_status,
+     		authorized,
+		  	on_status,
+    		department,
+     		join_reason,
+     		attendance_category,
+     		job_level,
+     		administrative_post,
+     		prof_and_tech_post,
+     		special_experience,
+     		last_edu_background,
+     		degree,
+    		degree_time,
+     		last_degree,
+     		subject,
+     		remark,
+     		mentor_type,
+     		major,
+     		post_type,
+     		graduate_province
+     	FROM
+     		teachers
+     	WHERE
+     		${columnName} LIKE #{likeVal}
+		ORDER BY
+			${columnName};
+	</select>
+
+
+	<select id="queryByColumns" parameterType="java.util.Map" resultType="Teacher">
+		SELECT
+			salary_id,
+			name,
+    		gender,
+     		office,
+     		birthday,
+     		race,
+    		identity,
+		 	hometown,
+     		politics_status,
+     		join_time,
+     		join_school_time,
+     		join_job_time,
+     		job,
+     		job_status,
+     		authorized,
+		  	on_status,
+    		department,
+     		join_reason,
+     		attendance_category,
+     		job_level,
+     		administrative_post,
+     		prof_and_tech_post,
+     		special_experience,
+     		last_edu_background,
+     		degree,
+    		degree_time,
+     		last_degree,
+     		subject,
+     		remark,
+     		mentor_type,
+     		major,
+     		post_type,
+     		graduate_province
+     	FROM
+     		teachers
+     	WHERE
+     		<foreach collection="columnNameAndVal" index="key" item="value" separator=" and " open="" close="">
+				${key} = #{value}
+			</foreach>
+		ORDER BY name;
+	</select>
+
+	<select id="likeQueryByColumns" parameterType="java.util.Map" resultType="Teacher">
+		SELECT
+		salary_id,
+		name,
+		gender,
+		office,
+		birthday,
+		race,
+		identity,
+		hometown,
+		politics_status,
+		join_time,
+		join_school_time,
+		join_job_time,
+		job,
+		job_status,
+		authorized,
+		on_status,
+		department,
+		join_reason,
+		attendance_category,
+		job_level,
+		administrative_post,
+		prof_and_tech_post,
+		special_experience,
+		last_edu_background,
+		degree,
+		degree_time,
+		last_degree,
+		subject,
+		remark,
+		mentor_type,
+		major,
+		post_type,
+		graduate_province
+		FROM
+		teachers
+		WHERE
+		<foreach collection="columnNameAndVal" index="key" item="value" separator=" and " open="" close="">
+			${key} LIKE '%${value}%'
+		</foreach>
+		ORDER BY name;
+	</select>
+
+	<select id="getAll" resultType="Teacher">
+		SELECT
+		salary_id,
+		name,
+		gender,
+		office,
+		birthday,
+		race,
+		identity,
+		hometown,
+		politics_status,
+		join_time,
+		join_school_time,
+		join_job_time,
+		job,
+		job_status,
+		authorized,
+		on_status,
+		department,
+		join_reason,
+		attendance_category,
+		job_level,
+		administrative_post,
+		prof_and_tech_post,
+		special_experience,
+		last_edu_background,
+		degree,
+		degree_time,
+		last_degree,
+		subject,
+		remark,
+		mentor_type,
+		major,
+		post_type,
+		graduate_province
+		FROM
+		teachers
+		ORDER BY name;
+	</select>
+
+</mapper>

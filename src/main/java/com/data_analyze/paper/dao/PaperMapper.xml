@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.paper.dao.PaperMapper">
+
+	<resultMap id="paperResultMap" type="Paper">
+		<id property="_id" column="_id"/>
+		<result property="salary_id"  column="salary_id"/>
+		<result property="ids_num" column="ids_num"/>
+		<result property="year" column="year"/>
+		<result property="author" column="author"/>
+		<result property="level" column="level"/>
+		<result property="title" column="title"/>
+	</resultMap>
+
+
+	<select id="queryAll" parameterType="String" resultType="Paper">
+		<bind name="columnName" value="'papers'+year"/>
+		SELECT
+			*
+		FROM
+			${columnName} as papers
+		WHERE
+			level LIKE #{levelPattern}
+	</select>
+
+	<select id="queryAllInOffice" parameterType="String" resultType="Paper">
+		<bind name="columnName" value="'papers'+year"/>
+		SELECT
+			*
+		FROM
+			${columnName} as papers
+		INNER JOIN
+			teachers
+		ON
+			papers.salary_id = teachers.salary_id AND
+			teachers.office = #{office} AND
+			papers.level LIKE #{levelPattern}
+	</select>
+
+
+
+</mapper>

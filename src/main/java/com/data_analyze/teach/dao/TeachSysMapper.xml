@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.teach.dao.TeachSysMapper">
+    <resultMap id="teachResultMap" type="Teach">
+        <id property="_id" column="_id"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="name" column="name"/>
+        <result property="rank" column="rank"/>
+        <result property="duty" column="duty"/>
+        <result property="theory_fs" column="theory_fs"/>
+        <result property="profession_fs" column="profession_fs"/>
+        <result property="ready_fs" column="ready_fs"/>
+        <result property="guide_fs" column="guide_fs"/>
+        <result property="graduation_fs" column="graduation_fs"/>
+        <result property="first_sum" column="first_sum"/>
+        <result property="theory_ss" column="theory_ss"/>
+        <result property="profession_ss" column="profession_ss"/>
+        <result property="ready_ss" column="ready_ss"/>
+        <result property="guide_ss" column="guide_ss"/>
+        <result property="graduation_ss" column="graduation_ss"/>
+        <result property="second_sum" column="second_sum"/>
+        <result property="remark_job" column="remark_job"/>
+        <result property="year_sum" column="year_sum"/>
+        <result property="second_etc" column="second_etc"/>
+        <result property="innovative_course" column="innovative_course"/>
+        <result property="college_workload" column="college_workload"/>
+    </resultMap>
+
+
+    <insert id="insertDynamic">
+        INSERT INTO ${tableName}(
+              salary_id,name,rank,duty,theory_fs,profession_fs,
+              ready_fs,guide_fs,graduation_fs,first_sum,theory_ss,
+              profession_ss,ready_ss,guide_ss,graduation_ss,second_sum,
+              remark_job,year_sum,second_etc,innovative_course,
+              college_workload
+        )VALUES (
+            #{items.salary_id},
+            #{items.name},
+            #{items.rank},
+            #{items.duty},
+            #{items.theory_fs},
+            #{items.profession_fs},
+            #{items.ready_fs},
+            #{items.guide_fs},
+            #{items.graduation_fs},
+            #{items.first_sum},
+            #{items.theory_ss},
+            #{items.profession_ss},
+            #{items.ready_ss},
+            #{items.guide_ss},
+            #{items.graduation_ss},
+            #{items.second_sum},
+            #{items.remark_job},
+            #{items.year_sum},
+            #{items.second_etc},
+            #{items.innovative_course},
+            #{items.college_workload}
+        )
+    </insert>
+
+    <!--直接的分页查询-->
+    <select id="selectPageListDynamic" resultMap="teachResultMap">
+        SELECT * FROM ${tableName} WHERE name LIKE #{pages.keyWord} LIMIT #{pages.start} , #{pages.rows}
+    </select>
+
+    <!--查询总记录数-->
+    <select id="selectPageCountDynamic" resultType="Integer">
+        SELECT COUNT(1) FROM ${tableName}
+    </select>
+
+    <update id="updateDynamic">
+        UPDATE ${tableName} SET
+        salary_id = #{items.salary_id},
+        name = #{items.name},
+        rank = #{items.rank},
+        duty = #{items.duty},
+        theory_fs = #{items.theory_fs},
+        profession_fs = #{items.profession_fs},
+        ready_fs = #{items.ready_fs},
+        guide_fs = #{items.guide_fs},
+        graduation_fs = #{items.graduation_fs},
+        first_sum = #{items.first_sum},
+        theory_ss = #{items.theory_ss},
+        profession_ss = #{items.profession_ss},
+        ready_ss = #{items.ready_ss},
+        guide_ss = #{items.guide_ss},
+        graduation_ss = #{items.graduation_ss},
+        second_sum = #{items.second_sum},
+        remark_job = #{items.remark_job},
+        year_sum = #{items.year_sum},
+        second_etc = #{items.second_etc},
+        innovative_course = #{items.innovative_course},
+        college_workload = #{items.college_workload}
+
+        WHERE _id = #{items._id};
+
+    </update>
+
+    <delete id="deleteDynamic">
+
+        DELETE FROM ${tableName} WHERE _id = #{items._id};
+
+    </delete>
+
+    <!--查询单个实体-->
+    <select id="selectDynamic" resultMap="teachResultMap">
+
+      	SELECT * FROM ${tableName} WHERE _id = #{items._id};
+
+    </select>
+
+</mapper>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.account.dao.AccountMapper">
+
+	<resultMap id="accountResultMap" type="Account">
+
+		<id property="acc_id" column="dept_id"/>
+
+		<result property="acc_login"  column="dept_name"/>
+
+		<result property="acc_name" column="dept_address"/>
+
+		<result property="acc_pass" column="acc_pass"/>
+
+	</resultMap>
+
+
+	<select id="login" parameterType="Account" resultMap="accountResultMap">
+
+		SELECT * FROM account WHERE acc_login = #{acc_login} AND acc_pass = #{acc_pass};
+
+	</select>
+
+	<insert id="insert" parameterType="Account">
+
+		insert into account(acc_login,acc_name,acc_pass) values(#{acc_login},#{acc_name},#{acc_pass});
+
+    </insert>
+
+</mapper>

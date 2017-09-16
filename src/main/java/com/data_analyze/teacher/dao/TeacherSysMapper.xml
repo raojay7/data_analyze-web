@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.teacher.dao.TeacherSysMapper">
+
+	<resultMap id="teacherResultMap" type="Teacher">
+
+		<id property="salary_id" column="salary_id"/>
+
+		<result property="name"  column="name"/>
+
+		<result property="gender" column="gender"/>
+
+		<result property="office" column="office"/>
+
+		<result property="birthday" column="birthday"/>
+
+		<result property="race" column="race"/>
+
+		<result property="identity" column="identity"/>
+
+		<result property="hometown" column="hometown"/>
+
+		<result property="politics_status" column="politics_status"/>
+
+		<result property="join_time" column="join_time"/>
+
+		<result property="join_school_time" column="join_school_time"/>
+
+		<result property="join_job_time" column="join_job_time"/>
+
+		<result property="job" column="job"/>
+
+		<result property="job_status" column="job_status"/>
+
+		<result property="authorized" column="authorized"/>
+
+		<result property="on_status" column="on_status"/>
+
+		<result property="department" column="department"/>
+
+		<result property="join_reason" column="join_reason"/>
+
+		<result property="attendance_category" column="attendance_category"/>
+
+		<result property="job_level" column="job_level"/>
+
+		<result property="administrative_post" column="administrative_post"/>
+
+		<result property="prof_and_tech_post" column="prof_and_tech_post"/>
+
+		<result property="special_experience" column="special_experience"/>
+
+		<result property="last_edu_background" column="last_edu_background"/>
+
+		<result property="degree" column="degree"/>
+
+		<result property="degree_time" column="degree_time"/>
+
+		<result property="last_degree" column="last_degree"/>
+
+		<result property="subject" column="subject"/>
+
+		<result property="remark" column="remark"/>
+
+		<result property="mentor_type" column="mentor_type"/>
+
+		<result property="major" column="major"/>
+
+		<result property="post_type" column="post_type"/>
+
+		<result property="graduate_province" column="graduate_province"/>
+
+	</resultMap>
+
+	<insert id="insert" parameterType="Teacher">
+
+		insert into
+		teachers(salary_id,name,gender,office,birthday,race,identity,hometown,politics_status,join_time,join_school_time,join_job_time,
+		job,job_status,authorized,on_status,department,join_reason,attendance_category,job_level,administrative_post,prof_and_tech_post,special_experience,
+		last_edu_background,degree,degree_time,last_degree,subject,remark,mentor_type,major,post_type,graduate_province)
+		values(
+		#{salary_id},#{name},#{gender},#{office},#{birthday},#{race},#{identity},#{hometown},#{politics_status},#{join_time},#{join_school_time},#{join_job_time},
+		#{job},#{job_status},#{authorized},#{on_status},#{department},#{join_reason},#{attendance_category},#{job_level},#{administrative_post},#{prof_and_tech_post},
+		#{special_experience},#{last_edu_background},#{degree},#{degree_time},#{last_degree},#{subject},#{remark},#{mentor_type},#{major},#{post_type}, #{graduate_province}
+		);
+
+	</insert>
+
+
+	<delete id="delete" parameterType="Teacher">
+		DELETE FROM teachers WHERE salary_id = #{salary_id}
+	</delete>
+
+	<!--直接的分页查询-->
+	<select id="selectPageList" parameterType="page" resultMap="teacherResultMap">
+		SELECT * FROM teachers WHERE name LIKE #{keyWord} LIMIT #{start} , #{rows}
+	</select>
+
+	<!--查询总记录数-->
+	<select id="selectPageCount" parameterType="page" resultType="Integer">
+		SELECT COUNT(1) FROM teachers WHERE name LIKE #{keyWord}
+	</select>
+
+	<!--更新-->
+	<update id="update" parameterType="Teacher">
+		UPDATE teachers SET
+		name = #{name},
+		gender = #{gender},
+		office = #{office},
+		birthday = #{birthday},
+		race = #{race},
+		identity = #{identity},
+		hometown = #{hometown},
+		politics_status = #{politics_status},
+		join_time = #{join_time},
+		join_school_time = #{join_school_time},
+		join_job_time = #{join_job_time},
+		job = #{job},
+		job_status = #{job_status},
+		authorized = #{authorized},
+		on_status = #{on_status},
+		department = #{department},
+		join_reason = #{join_reason},
+		attendance_category = #{attendance_category},
+		job_level = #{job_level},
+		administrative_post = #{administrative_post},
+		prof_and_tech_post = #{prof_and_tech_post},
+		special_experience = #{special_experience},
+		last_edu_background = #{last_edu_background},
+		degree = #{degree},
+		degree_time = #{degree_time},
+		last_degree = #{last_degree},
+		subject = #{subject},
+		remark = #{remark},
+		mentor_type = #{mentor_type},
+		major = #{major},
+		post_type = #{post_type},
+		graduate_province = #{graduate_province}
+	    WHERE
+
+	    salary_id = #{salary_id}
+
+	</update>
+
+	<!--查询单个实体-->
+	<select id="select" parameterType="Teacher" resultMap="teacherResultMap">
+		SELECT * FROM teachers WHERE salary_id = #{salary_id}
+	</select>
+
+</mapper>

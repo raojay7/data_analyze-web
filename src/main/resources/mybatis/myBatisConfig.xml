@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+	<!-- 设置类型别名 -->
+	<typeAliases>
+		<typeAlias type="com.data_analyze.teacher.entity.Teacher" alias="Teacher"/>
+		<typeAlias type="com.data_analyze.account.entity.Account" alias="Account"/>
+		<typeAlias type="com.data_analyze.paper.entity.Paper" alias="Paper"/>
+		<typeAlias type="com.data_analyze.publication.entity.Publication" alias="Publication"/>
+        <typeAlias type="com.data_analyze.project.entity.Project" alias="Project"/>
+		<typeAlias type="com.data_analyze.teach.entity.Teach" alias="Teach"/>
+		<typeAlias type="com.data_analyze.teachsum.entity.Teachsum" alias="Teachsum"/>
+		<typeAlias type="com.data_analyze.core.entity.Page" alias="page"/>
+	</typeAliases>
+
+<!--映射文件路径-->
+	<mappers>
+		<mapper resource="com/data_analyze/account/dao/AccountMapper.xml"/>
+		<mapper resource="com/data_analyze/teacher/dao/TeacherMapper.xml"/>
+		<mapper resource="com/data_analyze/teacher/dao/TeacherSysMapper.xml"/>
+		<mapper resource="com/data_analyze/teach/dao/TeachMapper.xml"/>
+		<mapper resource="com/data_analyze/teach/dao/TeachSysMapper.xml"/>
+		<mapper resource="com/data_analyze/project/dao/ProjectSysMapper.xml"/>
+		<mapper resource="com/data_analyze/paper/dao/PaperSysMapper.xml"/>
+		<mapper resource="com/data_analyze/teachsum/dao/TeachsumSysMapper.xml"/>
+	</mappers>
+
+</configuration>

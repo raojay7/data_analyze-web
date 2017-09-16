@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.publication.dao.PublicationMapper">
+
+    <resultMap id="publicationResultMap" type="Publication">
+        <id property="_id" column="_id"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="year" column="year"/>
+        <result property="author" column="author"/>
+        <result property="university" column="university"/>
+        <result property="title" column="title"/>
+        <result property="journal_name" column="journal_name"/>
+        <result property="type" column="type"/>
+        <result property="num_of_wd_cpd" column="num_of_wd_cpd"/>
+        <result property="num_of_wd_all" column="num_of_wd_all"/>
+        <result property="level" column="level"/>
+        <result property="workload" column="workload"/>
+    </resultMap>
+
+    <!--<select id="selectAccount" parameterType="Integer" resultMap="accountResultMap">-->
+
+
+    <!--</select>-->
+
+    <insert id="insert2015" parameterType="Publication">
+        INSERT INTO publications2015(salary_id, year, author, university, title, journal_name, type, num_of_wd_cpd, num_of_wd_all, level, workload)
+        VALUES (#{salary_id}, #{year}, #{author}, #{university}, #{title}, #{journal_name}, #{type}, #{num_of_wd_cpd}, #{num_of_wd_all}, #{level}, #{workload});
+    </insert>
+
+    <insert id="insert2016" parameterType="Publication">
+        INSERT INTO publications2016(salary_id, year, author, university, title, journal_name, type, num_of_wd_cpd, num_of_wd_all, level, workload)
+        VALUES (#{salary_id}, #{year}, #{author}, #{university}, #{title}, #{journal_name}, #{type}, #{num_of_wd_cpd}, #{num_of_wd_all}, #{level}, #{workload});
+    </insert>
+
+</mapper>

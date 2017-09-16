@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.teachsum.dao.TeachsumMapper">
+    <resultMap id="teachsumResultMap" type="Teachsum">
+        <id property="_id" column="_id"/>
+        <result property="department"  column="department"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="name" column="name"/>
+        <result property="year" column="year"/>
+        <result property="teach_workload" column="teach_workload"/>
+        <result property="mentor_load" column="mentor_load"/>
+        <result property="reform_workload" column="reform_workload"/>
+        <result property="sum_workload" column="sum_workload"/>
+    </resultMap>
+
+    <!--<select id="selectAccount" parameterType="Integer" resultMap="accountResultMap">-->
+
+
+    <!--</select>-->
+
+    <insert id="insert2015" parameterType="Teach">
+        INSERT INTO teachsum2015(salary_id, department, name, year, teach_workload, mentor_load, reform_workload, sum_workload)
+        VALUES (#{salary_id}, #{department}, #{name}, #{year}, #{teach_workload}, #{mentor_load}, #{reform_workload}, #{sum_workload});
+    </insert>
+
+    <insert id="insert2016" parameterType="Teach">
+        INSERT INTO teachsum2016(salary_id, department, name, year, teach_workload, mentor_load, reform_workload, sum_workload)
+        VALUES (#{salary_id}, #{department}, #{name}, #{year}, #{teach_workload}, #{mentor_load}, #{reform_workload}, #{sum_workload});
+    </insert>
+
+</mapper>

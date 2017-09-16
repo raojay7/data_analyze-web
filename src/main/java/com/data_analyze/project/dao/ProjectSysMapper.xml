@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.data_analyze.project.dao.ProjectSysMapper">
+
+    <resultMap id="projectResultMap" type="Project">
+        <id property="_id" column="_id"/>
+        <result property="salary_id"  column="salary_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="V_or_H"/>
+        <result property="budget_in_acc" column="budget_in_acc"/>
+    </resultMap>
+
+    <!--动态表名插入 -->
+
+
+    <insert id="insertDynamic">
+        INSERT INTO ${tableName}(
+        salary_id,name,V_or_H,budget_in_acc
+        )VALUES (
+        #{items.salary_id},
+        #{items.name},
+        #{items.type},
+        #{items.budget_in_acc}
+        )
+    </insert>
+
+    <!--直接的分页查询-->
+    <select id="selectPageListDynamic" resultMap="projectResultMap">
+        SELECT * FROM ${tableName} WHERE name LIKE #{pages.keyWord} LIMIT #{pages.start} , #{pages.rows}
+    </select>
+
+    <!--查询总记录数-->
+    <select id="selectPageCountDynamic" resultType="Integer">
+        SELECT COUNT(1) FROM ${tableName}
+    </select>
+
+    <!--传入动态表名更新-->
+    <update id="updateDynamic">
+        UPDATE ${tableName} SET
+        salary_id = #{items.salary_id},
+        name = #{items.name},
+        V_or_H = #{items.type},
+        budget_in_acc = #{items.budget_in_acc}
+
+        WHERE _id = #{items._id};
+
+    </update>
+
+    <!--传入动态表明删除-->
+    <delete id="deleteDynamic">
+
+        DELETE FROM ${tableName} WHERE _id = #{items._id};
+
+    </delete>
+
+    <!--查询单个实体-->
+    <select id="selectDynamic" resultMap="projectResultMap">
+
+        SELECT * FROM ${tableName} WHERE _id = #{items._id};
+
+    </select>
+
+</mapper>
